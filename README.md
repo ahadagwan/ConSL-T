@@ -33,8 +33,8 @@ ConSL-T reads the plant and applies the standard's rules for you. Every automati
 written with its reason, marked as automatic, and a person's edit always takes precedence.
 
 - **Targets worked out for every zone,** raised automatically for zones exposed to the
-  internet or a vendor's remote access, and for zones sitting behind such a zone with no
-  firewall between them.
+  internet or a vendor's remote access, and for any zone an attacker could reach from them
+  without crossing a firewall.
 - **Requirements judged from your controls:** record a firewall, a backup, monitoring or a
   login policy once, and every requirement it answers is judged across every zone it covers.
 - **A plan proposed for you:** actions that close your gaps, the zones and machines each one

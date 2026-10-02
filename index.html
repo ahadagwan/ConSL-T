@@ -102,28 +102,36 @@ h1{font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1.06;letter-spacin
 .acc-body{padding:0 22px 22px 58px;font-size:16px;line-height:1.7;color:var(--on-navy);max-width:860px}
 .acc-body[hidden]{display:none}
 
-/* demo */
-.demo{display:flex;flex-wrap:wrap;gap:24px;align-items:stretch}
-.demo-in{flex:1 1 380px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:22px}
-.demo-q{font-weight:600;font-size:15px;margin-bottom:10px}
-.pills{display:flex;flex-wrap:wrap;gap:8px}
-.pill{cursor:pointer;font:inherit;font-size:14.5px;font-weight:600;padding:10px 14px;min-height:44px;border-radius:10px;background:#fff;color:var(--ink);border:1px solid var(--line-2)}
-.pill[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal)}
-.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;font-size:15.5px;line-height:1.5;min-height:44px}
-.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--teal);flex:none}
-.check.sub-check{margin-left:32px}
-.check.off{opacity:.45;cursor:default}
-.demo-out{flex:1 1 380px;min-width:0;background:var(--navy);color:#fff;border-radius:20px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:18px}
-.demo-out .label{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal-light)}
-.level{display:flex;align-items:baseline;gap:12px}
-.level b{font-family:var(--display);font-size:56px;font-weight:800;line-height:1}
-.level span{font-size:14px;color:var(--on-navy-sub)}
-.bars{display:flex;gap:8px}
-.bars i{flex:1;height:10px;border-radius:6px;background:var(--navy-line)}
-.bars i.c{background:var(--teal-bar)} .bars i.e{background:var(--orange)}
-.reasons{display:flex;flex-direction:column;gap:10px}
-.reasons div{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.55;color:var(--on-navy)}
-.reasons i{width:8px;height:8px;margin-top:8px;border-radius:50%;flex:none}
+/* see it work: three-step example */
+.ex{display:flex;flex-wrap:wrap;gap:18px;align-items:stretch;counter-reset:ex}
+.ex-card{flex:1 1 300px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(22px,2.6vw,28px);display:flex;flex-direction:column;gap:16px;box-shadow:0 10px 30px rgba(8,39,57,.05);transition:transform .2s ease,box-shadow .2s ease}
+.ex-card:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(8,39,57,.10)}
+.ex-card.mid{background:var(--navy);border-color:var(--navy);color:#fff}
+.ex-step{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal)}
+.ex-card.mid .ex-step{color:var(--teal-light)}
+.ex-step b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--teal-soft);color:var(--teal-2);font-family:var(--display);font-size:13px}
+.ex-card.mid .ex-step b{background:#143f51;color:var(--teal-light)}
+.ex-card h3{margin:0;font-size:20px;line-height:1.25}
+.ex-card.mid h3{color:#fff}
+.ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ex-list li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--body)}
+.ex-list li svg{flex:none;margin-top:3px;color:var(--teal)}
+.ex-rows{display:flex;flex-direction:column;gap:10px}
+.ex-row{background:#0d3346;border:1px solid var(--navy-line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.ex-row .ex-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.ex-row .nm{font-weight:600;font-size:15px}
+.ex-row .slt{font-family:var(--display);font-weight:800;font-size:18px;color:#fff;white-space:nowrap}
+.ex-row .slt.up{color:var(--orange-light)}
+.ex-row .rs{font-size:13.5px;line-height:1.45;color:var(--on-navy-muted)}
+.ex-flag{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:#ffd2b3;background:rgba(242,105,15,.12);border:1px solid rgba(242,105,15,.35);border-radius:12px;padding:10px 12px}
+.ex-action{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#f8fbfc;display:flex;flex-direction:column;gap:6px}
+.ex-action .k{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--orange)}
+.ex-action b{font-size:15.5px;line-height:1.4}
+.ex-action span{font-size:13.5px;color:var(--muted)}
+.ex-docs{display:flex;flex-wrap:wrap;gap:8px}
+.ex-docs span{font-size:13px;font-weight:600;color:var(--teal-2);background:var(--teal-soft);border-radius:8px;padding:6px 10px}
+.ex-note{margin:16px 2px 0;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.ex-card{transition:none}.ex-card:hover{transform:none}}
 
 /* trust, deliverables */
 .tiles{display:flex;flex-wrap:wrap;gap:16px}
@@ -227,25 +235,37 @@ footer b{font-family:var(--display);color:var(--ink)}
 <section id="demo">
   <div class="wrap">
     <div class="kicker">See it work</div>
-    <h2>Describe an area, watch the target follow</h2>
-    <p class="sub">A simplified illustration of how ConSL-T reasons about one area of a plant. The real method weighs more inputs, and shows every one of them.</p>
-    <div class="demo">
-      <div class="demo-in">
-        <div>
-          <div class="demo-q" id="conseq-q">What is the worst a compromise could do here?</div>
-          <div class="pills" role="group" aria-labelledby="conseq-q" id="pills"></div>
-        </div>
-        <label class="check"><input type="checkbox" id="direct"><span>Connected straight to the internet or a vendor's remote access</span></label>
-        <label class="check"><input type="checkbox" id="behind" checked><span>Sits right behind an area that is connected like that</span></label>
-        <label class="check sub-check" id="fw-label"><input type="checkbox" id="fw"><span>A firewall is recorded on the link between them</span></label>
+    <h2>A few facts in, the expert work out</h2>
+    <p class="sub">Tell ConSL-T what the plant looks like. It works out the targets, finds what falls short, and proposes what to do about it, with the reason written next to every answer.</p>
+    <div class="ex">
+      <div class="ex-card">
+        <div class="ex-step"><b>1</b>You describe the plant</div>
+        <h3>A small water works</h3>
+        <ul class="ex-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>A vendor reaches the site through a remote-access gateway.</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>The historian and patch server sit in a DMZ behind it.</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>Plant control links to the DMZ, with no firewall recorded on that link.</span></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg><span>A compromise of plant control could stop treatment.</span></li>
+        </ul>
       </div>
-      <div class="demo-out" aria-live="polite">
-        <div class="label">Access control target</div>
-        <div class="level"><b id="level">SL 2</b><span>of 4</span></div>
-        <div class="bars" id="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="reasons" id="reasons"></div>
+      <div class="ex-card mid">
+        <div class="ex-step"><b>2</b>ConSL-T works it out</div>
+        <h3>Targets, with their reasons</h3>
+        <div class="ex-rows">
+          <div class="ex-row"><div class="ex-top"><span class="nm">Remote access</span><span class="slt">SL-T 2</span></div><span class="rs">Connected straight to the internet.</span></div>
+          <div class="ex-row"><div class="ex-top"><span class="nm">Plant DMZ</span><span class="slt">SL-T 2</span></div><span class="rs">Right behind remote access, no firewall on the link.</span></div>
+          <div class="ex-row"><div class="ex-top"><span class="nm">Plant control</span><span class="slt up">SL-T 3</span></div><span class="rs">Reachable from the internet without crossing a firewall, so its separation target goes up a level.</span></div>
+        </div>
+        <div class="ex-flag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"></path></svg><span>Network segmentation for plant control: not met. Nothing recorded separates it from the DMZ.</span></div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-step"><b>3</b>You get the plan</div>
+        <h3>What to do, and the paperwork</h3>
+        <div class="ex-action"><span class="k">Proposed action</span><b>Put a firewall between the Plant DMZ and plant control.</b><span>Closes the segmentation gap and takes plant control back off the internet's path.</span></div>
+        <div class="ex-action"><span class="k">Generated for you</span><div class="ex-docs"><span>Requirements specification</span><span>Risk report</span><span>Gap report</span><span>Assessor pack</span></div></div>
       </div>
     </div>
+    <p class="ex-note">A simplified example to show the idea. Every automatic answer in ConSL-T is marked, and you can edit any of them.</p>
   </div>
 </section>
 
@@ -308,7 +328,7 @@ footer b{font-family:var(--display);color:var(--ink)}
     { label: 'Run the programme', title: 'The organizational side', body: 'Policies, training, change records, reviews and suppliers are read to judge the security programme and how mature it is, and the regulations your sector and location bring are identified.', tags: ['87 programme requirements', 'Maturity', 'Regulations'] }
   ];
   var AUTOS = [
-    { title: 'Targets for every zone', line: 'Derived from consequence, threat and exposure.', body: 'Security-level targets come from what a compromise could do to people, the environment, production and the business, and from the threat the zone faces. Zones on the internet or a vendor remote-access line, and zones right behind them with no firewall on the link, are raised on their own, with the reason written out.' },
+    { title: 'Targets for every zone', line: 'Derived from consequence, threat and exposure.', body: 'Security-level targets come from what a compromise could do to people, the environment, production and the business, and from the threat the zone faces. Zones on the internet or a vendor remote-access line, and any zone an attacker could reach from them without crossing a firewall, are raised on their own, with the reason written out.' },
     { title: 'Requirements judged from your controls', line: 'Record a control once; every requirement it answers follows.', body: 'Record the firewall, the backup, the monitoring or the login policy once, and every requirement it answers is judged across every zone it covers. Where a record shows only part of the picture, the answer says exactly what is missing.' },
     { title: 'A plan proposed for you', line: 'Actions worked back from your gaps.', body: 'ConSL-T works backwards from your gaps to propose the actions that close them, names the zones and machines each one touches, and keeps real changes to the plant apart from simply writing down what is already true.' },
     { title: 'The programme read from your records', line: 'Policies, training, changes, reviews, suppliers.', body: 'The organizational requirements and their maturity are judged from the records a site already keeps: whether something is written down, being done, or done and repeated, with the shortfall named.' },
@@ -377,40 +397,7 @@ footer b{font-family:var(--display);color:var(--ink)}
   }
   openRow(0);
 
-  // demo
-  var CONS = [{ v: 1, label: 'Minor disruption', name: 'minor disruption' }, { v: 2, label: 'Production stops', name: 'production stopping' }, { v: 3, label: 'People could be hurt', name: 'people being hurt' }];
-  var st = { conseq: 2 };
-  var pills = document.getElementById('pills');
-  var pillBtns = CONS.map(function (c) {
-    var b = el('button', { type: 'button', 'class': 'pill', text: c.label });
-    b.addEventListener('click', function () { st.conseq = c.v; renderDemo(); });
-    pills.appendChild(b); return b;
-  });
-  var direct = document.getElementById('direct'), behind = document.getElementById('behind'), fw = document.getElementById('fw'), fwLabel = document.getElementById('fw-label');
-  [direct, behind, fw].forEach(function (x) { x.addEventListener('change', renderDemo); });
-  function reason(color, text) {
-    var i = el('i'); i.style.background = color;
-    return el('div', {}, [i, el('span', { text: text })]);
-  }
-  function renderDemo() {
-    pillBtns.forEach(function (b, j) { b.setAttribute('aria-pressed', CONS[j].v === st.conseq ? 'true' : 'false'); });
-    fw.disabled = !behind.checked; fwLabel.classList.toggle('off', !behind.checked);
-    var inherits = behind.checked && !fw.checked;
-    var floor = (direct.checked || inherits) ? 2 : 0;
-    var level = Math.max(st.conseq, floor);
-    document.getElementById('level').textContent = 'SL ' + level;
-    Array.prototype.forEach.call(document.querySelectorAll('#bars i'), function (bar, j) {
-      var n = j + 1; bar.className = n <= level ? (n <= st.conseq ? 'c' : 'e') : '';
-    });
-    var name = CONS.filter(function (c) { return c.v === st.conseq; })[0].name;
-    var out = [reason('#3fb8c4', 'The worst case here is ' + name + ', which on its own asks for SL ' + st.conseq + '.')];
-    if (direct.checked) out.push(reason('#f2690f', 'Directly reachable from outside, so access control is held at SL 2 or more.'));
-    else if (inherits) out.push(reason('#f2690f', 'Right behind an exposed area with no firewall recorded on the link, so it is treated as exposed too.'));
-    else if (behind.checked && fw.checked) out.push(reason('#9fb3bf', 'Behind an exposed area, but the firewall recorded on the link keeps the exposure out.'));
-    if (level > st.conseq) out.push(reason('#9fb3bf', 'Exposure raised the target above what the consequence alone would set.'));
-    document.getElementById('reasons').replaceChildren.apply(document.getElementById('reasons'), out);
-  }
-  renderDemo();
+
 })();
 </script>
 </body>
