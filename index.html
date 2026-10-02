@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ConSL-T: ISA/IEC 62443 Implementation Workbench</title>
+<meta name="description" content="ConSL-T: an ISA/IEC 62443 implementation workbench for industrial asset owners. Coming soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#f6f8fa;
+  --surface:#ffffff;
+  --surface-2:#eef4f6;
+  --ink:#082739;
+  --muted:#526575;
+  --line:#dce5e9;
+  --accent:#087f95;
+  --accent-2:#0b6675;
+  --accent-soft:#e5f4f6;
+  --orange:#f2690f;
+  --orange-soft:#fff0e7;
+  --shadow:0 18px 50px rgba(8,39,57,.08);
+  --shadow-sm:0 8px 24px rgba(8,39,57,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
+
+header.hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 15%,rgba(8,127,149,.12),transparent 28%),
+    radial-gradient(circle at 12% 85%,rgba(242,105,15,.07),transparent 24%),
+    linear-gradient(180deg,#fbfcfd 0%,#f4f8f9 100%);
+  color:var(--ink);
+  padding:34px 0 92px;
+  border-bottom:1px solid var(--line);
+}
+header.hero:after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;height:4px;
+  background:linear-gradient(90deg,var(--orange),var(--accent));
+}
+.hero-top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;margin-bottom:70px;
+}
+.logo{display:block;width:min(270px,65vw);height:auto;object-fit:contain}
+.top-label{
+  font-size:12px;font-weight:800;letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--muted)
+}
+.hero-copy{max-width:900px}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 12px;border-radius:999px;
+  border:1px solid #f5b48c;background:var(--orange-soft);
+  color:#a8470a;font-size:12px;font-weight:800;
+  letter-spacing:.8px;text-transform:uppercase;
+}
+.badge:before{
+  content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--orange);box-shadow:0 0 0 4px rgba(242,105,15,.12)
+}
+h1{
+  font-size:clamp(40px,6vw,68px);
+  line-height:1.02;letter-spacing:-2.8px;
+  margin:20px 0 22px;font-weight:800;max-width:920px;
+}
+.lede{
+  font-size:clamp(18px,2vw,21px);
+  line-height:1.65;color:var(--hero-muted,var(--muted));
+  max-width:790px;margin:0;
+}
+.hero-note{
+  margin-top:30px;display:flex;flex-wrap:wrap;gap:10px;
+}
+.hero-note span{
+  display:inline-flex;align-items:center;
+  font-size:13px;font-weight:700;color:var(--accent-2);
+  padding:8px 12px;border:1px solid #cfe4e8;
+  background:rgba(229,244,246,.75);border-radius:8px;
+}
+.hero-note span:first-child{color:#8e3e0c;background:var(--orange-soft);border-color:#f5c5a7}
+
+section{padding:88px 0}
+section + section{border-top:1px solid var(--line)}
+.section-kicker{
+  display:block;margin-bottom:10px;
+  color:var(--accent);font-size:12px;font-weight:800;
+  letter-spacing:1.2px;text-transform:uppercase;
+}
+h2{
+  font-size:clamp(28px,4vw,40px);line-height:1.12;
+  letter-spacing:-1.1px;margin:0 0 12px;font-weight:800;
+}
+.sub{color:var(--muted);max-width:760px;margin:0 0 42px;font-size:17px}
+
+.grid{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.card{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:28px;
+  min-height:220px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#bdd7dc;
+  box-shadow:var(--shadow)
+}
+.card .step{
+  display:inline-flex;font-size:11px;font-weight:800;
+  letter-spacing:.8px;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-soft);
+  padding:5px 9px;border-radius:6px;margin-bottom:18px;
+}
+.card h3{margin:0 0 10px;font-size:19px;line-height:1.3;letter-spacing:-.25px}
+.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+
+#automation{background:#082739;color:#fff}
+#automation .section-kicker{color:#6ed0cf}
+#automation h2{color:#fff}
+#automation .sub{color:#b9cbd4}
+#automation .card{
+  background:#0d3346;border-color:#1d4b5e;box-shadow:none;
+}
+#automation .card:hover{border-color:#367286;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+#automation .card h3{color:#fff}
+#automation .card p{color:#b9cbd4}
+#automation .card .step{background:#143f51;color:#6ed0cf}
+
+.pillars{
+  display:grid;gap:1px;overflow:hidden;
+  grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--line);border-radius:16px;background:var(--line);
+  box-shadow:var(--shadow-sm);
+}
+.pillar{background:var(--surface);padding:28px;min-height:205px}
+.pillar .num{
+  display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:9px;
+  font-size:12px;font-weight:800;color:var(--accent);
+  background:var(--accent-soft);margin-bottom:20px;
+}
+.pillar h3{margin:0 0 8px;font-size:17px;line-height:1.35}
+.pillar p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.65}
+
+.deliv{
+  list-style:none;padding:0;margin:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+}
+ul.deliv li{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;padding:19px 20px;
+  font-size:14.5px;box-shadow:var(--shadow-sm);
+}
+ul.deliv li strong{display:block;font-size:15px;margin-bottom:4px}
+ul.deliv li span{color:var(--muted)}
+
+.launch{
+  position:relative;overflow:hidden;
+  background:#082739;border-radius:22px;
+  padding:54px;box-shadow:var(--shadow);
+  color:#fff;
+}
+.launch:before{
+  content:"";position:absolute;width:360px;height:360px;
+  border-radius:50%;right:-130px;top:-190px;
+  background:rgba(8,127,149,.35)
+}
+.launch:after{
+  content:"";position:absolute;width:220px;height:220px;
+  border-radius:50%;left:-130px;bottom:-160px;
+  border:1px solid rgba(255,255,255,.1)
+}
+.launch-inner{position:relative;z-index:1;max-width:760px}
+.launch h2{color:#fff;margin-bottom:12px}
+.launch p{color:#bfd0d8;margin:0 0 24px}
+.launch-badge{
+  display:inline-block;padding:6px 10px;border-radius:6px;
+  background:rgba(242,105,15,.16);color:#ffb27e;
+  font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:16px
+}
+.launch-line{
+  display:flex;align-items:center;gap:12px;
+  color:#e3edf0;font-size:13px;font-weight:600
+}
+.launch-line:before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:#4ec7bd;box-shadow:0 0 0 5px rgba(78,199,189,.12)
+}
+
+footer{padding:34px 0 52px;color:var(--muted);font-size:13px}
+footer p{margin:0;max-width:850px}
+footer .footer-brand{font-weight:800;color:var(--ink);margin-bottom:5px}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pillars{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .wrap{width:min(100% - 28px,1120px)}
+  header.hero{padding:24px 0 64px}
+  .hero-top{margin-bottom:52px;align-items:flex-start}
+  .top-label{display:none}
+  .logo{width:230px}
+  h1{letter-spacing:-1.8px;font-size:42px}
+  .lede{font-size:17px}
+  section{padding:62px 0}
+  .grid,.pillars,.deliv{grid-template-columns:1fr}
+  .card{min-height:0;padding:23px}
+  .pillar{min-height:0}
+  .launch{padding:34px 24px;border-radius:16px}
+}
+
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <img class="logo" src="conslt-logo.jpg" alt="ConSL-T, ISA/IEC 62443 Implementation Workbench" width="394" height="251">
+      <span class="top-label">OT cybersecurity, worked out</span>
+    </div>
+    <div class="hero-copy">
+    <div><span class="badge">Coming soon</span></div>
+    <h1>An ISA/IEC 62443 implementation workbench for asset owners</h1>
+    <p class="lede">ConSL-T takes any industrial or OT site from its first asset inventory to audit-ready deliverables. It works out the answers instead of handing you forms to fill in: security targets, applicable requirements, gaps, risks and a plan to close them.</p>
+    <div class="hero-note">
+      <span>Any OT site</span><span>Worked examples included: water, power, oil &amp; gas, pharma, manufacturing</span>
+    </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <span class="section-kicker">The workflow</span>
+      <h2>From inventory to audit, in one place</h2>
+      <p class="sub">Each step feeds the next, so a change in the plant shows up everywhere it matters.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="step">Model the plant</span>
+          <h3>Assets, zones and conduits</h3>
+          <p>Capture the inventory on site or import it from a spreadsheet, with fields that fit each kind of equipment. ConSL-T proposes a zone and conduit design you refine.</p>
+        </div>
+        <div class="card">
+          <span class="step">Set targets</span>
+          <h3>Security levels, derived</h3>
+          <p>Each zone's target security level is worked out from consequence and threat, using a transparent, versioned method. Zones exposed to outside networks, or reachable through unprotected links, are raised automatically.</p>
+        </div>
+        <div class="card">
+          <span class="step">Assess</span>
+          <h3>Requirements and gaps</h3>
+          <p>See which system requirements apply to each zone, with many judged automatically from the controls you have recorded, and the gap between what you have and what you need.</p>
+        </div>
+        <div class="card">
+          <span class="step">Analyse risk</span>
+          <h3>A guided risk workshop</h3>
+          <p>Threat scenarios seeded from MITRE ATT&amp;CK for ICS, rated against your organization's own risk criteria, with credit for countermeasures and a risk register that checks every decision against tolerance.</p>
+        </div>
+        <div class="card">
+          <span class="step">Plan</span>
+          <h3>Mitigation and roadmap</h3>
+          <p>Gaps are ranked by severity and turned into a costed plan and a dated roadmap, with a projection of how much each action improves your security posture.</p>
+        </div>
+        <div class="card">
+          <span class="step">Run the programme</span>
+          <h3>The organizational side</h3>
+          <p>Policies, training, change records, reviews and suppliers are read to judge the security programme and its maturity, and the regulations that apply to your sector are identified.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="automation">
+    <div class="wrap">
+      <span class="section-kicker">Automation</span>
+      <h2>The automation does the heavy lifting</h2>
+      <p class="sub">Most 62443 work is reading the plant and applying the standard's rules to it, again and again. ConSL-T does that reading for you, writes its answer, marks it as automatic, and leaves the final say with you.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="step">Automatic</span>
+          <h3>Targets worked out for every zone</h3>
+          <p>Security-level targets are derived from what a compromise could do to people, the environment, production and the business, and from the threat the zone faces. Zones exposed to the internet, a vendor's remote access, or sitting behind such a zone without a firewall between them are raised on their own.</p>
+        </div>
+        <div class="card">
+          <span class="step">Automatic</span>
+          <h3>Requirements judged from your controls</h3>
+          <p>Record the firewall, the backup, the monitoring or the login policy once, and every requirement it answers is judged across every zone it covers, with the reason written out. Where a record shows only part of the picture, it says what is missing.</p>
+        </div>
+        <div class="card">
+          <span class="step">Automatic</span>
+          <h3>A plan proposed for you</h3>
+          <p>ConSL-T works backwards from your gaps to propose the actions that close them, names the zones and machines each one touches, separates real changes to the plant from simply writing down what is already true, and shows how much each action improves your posture.</p>
+        </div>
+        <div class="card">
+          <span class="step">Automatic</span>
+          <h3>The programme read from your records</h3>
+          <p>Policies, training records, change records, review plans and supplier assessments are read to judge the organizational requirements and how mature each one is: written down, being done, or done and repeated.</p>
+        </div>
+        <div class="card">
+          <span class="step">Automatic</span>
+          <h3>Threats and regulations identified</h3>
+          <p>Each zone gets the ICS attack techniques that apply to what it holds and how it is reached, and each site gets the regulations its sector and location bring with them, from NIS2 to OSHA process safety.</p>
+        </div>
+        <div class="card">
+          <span class="step">Automatic</span>
+          <h3>What to record next</h3>
+          <p>Where the engine cannot decide, it says exactly which fact on which machine would let it, grouped so one visit to site answers many questions at once.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="section-kicker">Trust</span>
+      <h2>Built to be trusted</h2>
+      <p class="sub">An assessment is only useful if you can see how it was reached and correct it when it is wrong.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="num">01</span>
+          <h3>Every answer shows its working</h3>
+          <p>Any derived value can be traced back to the inputs and rules that produced it.</p>
+        </div>
+        <div class="pillar">
+          <span class="num">02</span>
+          <h3>You always have the last word</h3>
+          <p>Automatic answers are clearly marked, and a person's edit always takes precedence over the engine.</p>
+        </div>
+        <div class="pillar">
+          <span class="num">03</span>
+          <h3>Nothing goes quietly out of date</h3>
+          <p>When an input changes, every result that depended on it is flagged for review.</p>
+        </div>
+        <div class="pillar">
+          <span class="num">04</span>
+          <h3>Your data stays with you</h3>
+          <p>ConSL-T runs on your own machine. Your plant's details are not sent anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="section-kicker">Deliverables</span>
+      <h2>Deliverables, generated</h2>
+      <p class="sub">The documents an assessment needs, produced from the work itself rather than written by hand.</p>
+      <ul class="deliv">
+        <li><strong>Cybersecurity Requirements Specification</strong><span>The specification for each zone and conduit.</span></li>
+        <li><strong>Risk and gap reports</strong><span>Including the detailed risk assessment.</span></li>
+        <li><strong>Executive dashboard and summary</strong><span>Posture at a glance for management.</span></li>
+        <li><strong>Assessor pack</strong><span>PDF and HTML, ready to hand to an auditor.</span></li>
+        <li><strong>Sealed bundle</strong><span>A tamper-evident export an auditor can verify independently.</span></li>
+        <li><strong>Framework mapping</strong><span>ISO 27001, NIST CSF 2.0 and NIST SP 800-82.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="launch">
+        <div class="launch-inner">
+          <span class="launch-badge">Coming soon</span>
+          <h2>Built for the people who have to make 62443 real.</h2>
+          <p>ConSL-T is in final testing ahead of its first release. Follow the project on GitHub for the launch.</p>
+          <div class="launch-line">Audit-ready outputs · transparent decisions · your data stays with you</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="footer-brand">ConSL-T</p>
+    <p>An ISA/IEC 62443 implementation workbench for industrial asset owners.</p>
+  </div>
+</footer>
+</body>
+</html>
