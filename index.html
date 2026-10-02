@@ -7,402 +7,411 @@
 <meta name="description" content="ConSL-T: an ISA/IEC 62443 implementation workbench for industrial asset owners. Coming soon.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-
 :root{
-  --bg:#f6f8fa;
-  --surface:#ffffff;
-  --surface-2:#eef4f6;
-  --ink:#082739;
-  --muted:#526575;
-  --line:#dce5e9;
-  --accent:#087f95;
-  --accent-2:#0b6675;
-  --accent-soft:#e5f4f6;
-  --orange:#f2690f;
-  --orange-soft:#fff0e7;
-  --shadow:0 18px 50px rgba(8,39,57,.08);
-  --shadow-sm:0 8px 24px rgba(8,39,57,.06);
+  --navy:#082739; --navy-2:#0d3346; --navy-3:#0f3b50; --navy-line:#1d4b5e; --navy-line-on:#367286;
+  --ink:#082739; --body:#3d5468; --muted:#526575;
+  --teal:#087f95; --teal-2:#0b6675; --teal-soft:#e5f4f6; --teal-light:#7fd3d6; --teal-bar:#3fb8c4;
+  --orange:#f2690f; --orange-2:#d95c08; --orange-soft:#fff0e7; --orange-light:#ffb27e;
+  --line:#dce5e9; --line-2:#c7dde2; --tint:#fbfbfb; --page:#f4f7f9; --card:#ffffff;
+  --on-navy:#dbe6ea; --on-navy-muted:#9fb3bf; --on-navy-sub:#b9cbd4;
+  --display:"Sora",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-html,body{margin:0}
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-  font-size:16px;
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-}
-a{color:inherit}
-.wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
-
-header.hero{
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 82% 15%,rgba(8,127,149,.12),transparent 28%),
-    radial-gradient(circle at 12% 85%,rgba(242,105,15,.07),transparent 24%),
-    linear-gradient(180deg,#fbfcfd 0%,#f4f8f9 100%);
-  color:var(--ink);
-  padding:34px 0 92px;
-  border-bottom:1px solid var(--line);
-}
-header.hero:after{
-  content:"";
-  position:absolute;
-  left:0;right:0;bottom:0;height:4px;
-  background:linear-gradient(90deg,var(--orange),var(--accent));
-}
-.hero-top{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:20px;margin-bottom:70px;
-}
-.logo{display:block;width:min(270px,65vw);height:auto;object-fit:contain}
-.top-label{
-  font-size:12px;font-weight:800;letter-spacing:1.4px;
-  text-transform:uppercase;color:var(--muted)
-}
-.hero-copy{max-width:900px}
-.badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:7px 12px;border-radius:999px;
-  border:1px solid #f5b48c;background:var(--orange-soft);
-  color:#a8470a;font-size:12px;font-weight:800;
-  letter-spacing:.8px;text-transform:uppercase;
-}
-.badge:before{
-  content:"";width:7px;height:7px;border-radius:50%;
-  background:var(--orange);box-shadow:0 0 0 4px rgba(242,105,15,.12)
-}
-h1{
-  font-size:clamp(40px,6vw,68px);
-  line-height:1.02;letter-spacing:-2.8px;
-  margin:20px 0 22px;font-weight:800;max-width:920px;
-}
-.lede{
-  font-size:clamp(18px,2vw,21px);
-  line-height:1.65;color:var(--hero-muted,var(--muted));
-  max-width:790px;margin:0;
-}
-.hero-note{
-  margin-top:30px;display:flex;flex-wrap:wrap;gap:10px;
-}
-.hero-note span{
-  display:inline-flex;align-items:center;
-  font-size:13px;font-weight:700;color:var(--accent-2);
-  padding:8px 12px;border:1px solid #cfe4e8;
-  background:rgba(229,244,246,.75);border-radius:8px;
-}
-.hero-note span:first-child{color:#8e3e0c;background:var(--orange-soft);border-color:#f5c5a7}
-
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--teal)} a:hover{color:var(--teal-2)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--teal)}
+h1,h2,h3{font-family:var(--display)}
+h2{font-weight:700;font-size:clamp(28px,3.4vw,42px);letter-spacing:-0.8px;line-height:1.12;margin:10px 0 12px}
+.sub{color:var(--muted);font-size:17px;line-height:1.6;margin:0 0 36px;max-width:700px}
 section{padding:88px 0}
-section + section{border-top:1px solid var(--line)}
-.section-kicker{
-  display:block;margin-bottom:10px;
-  color:var(--accent);font-size:12px;font-weight:800;
-  letter-spacing:1.2px;text-transform:uppercase;
-}
-h2{
-  font-size:clamp(28px,4vw,40px);line-height:1.12;
-  letter-spacing:-1.1px;margin:0 0 12px;font-weight:800;
-}
-.sub{color:var(--muted);max-width:760px;margin:0 0 42px;font-size:17px}
 
-.grid{
-  display:grid;gap:18px;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-}
-.card{
-  position:relative;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:28px;
-  min-height:220px;
-  box-shadow:var(--shadow-sm);
-  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
-}
-.card:hover{
-  transform:translateY(-3px);
-  border-color:#bdd7dc;
-  box-shadow:var(--shadow)
-}
-.card .step{
-  display:inline-flex;font-size:11px;font-weight:800;
-  letter-spacing:.8px;text-transform:uppercase;
-  color:var(--accent);background:var(--accent-soft);
-  padding:5px 9px;border-radius:6px;margin-bottom:18px;
-}
-.card h3{margin:0 0 10px;font-size:19px;line-height:1.3;letter-spacing:-.25px}
-.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+/* header */
+.top{background:var(--tint);border-bottom:1px solid var(--line)}
+.top .wrap{padding-top:18px;padding-bottom:18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.top img{width:168px;height:auto;display:block}
+.top nav{display:flex;flex-wrap:wrap;align-items:center;gap:22px;font-size:15px;font-weight:500}
+.top nav a{color:#2e4657;text-decoration:none}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:14px 22px;border-radius:12px;font-weight:600;text-decoration:none;transition:background .2s ease}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:hover{background:var(--orange-2);color:#fff}
+.btn-ghost{color:var(--ink);border:1px solid var(--line-2);background:transparent}
+.btn-ghost:hover{background:var(--teal-soft);color:var(--ink)}
+.top nav .btn{min-height:44px;padding:10px 16px;border-radius:10px}
 
-#automation{background:#082739;color:#fff}
-#automation .section-kicker{color:#6ed0cf}
+/* hero */
+.hero{background:var(--tint);border-bottom:4px solid var(--orange)}
+.hero .wrap{padding-top:72px;padding-bottom:88px;display:flex;flex-wrap:wrap;align-items:center;gap:48px}
+.hero-copy{flex:1 1 520px;min-width:0}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--orange-soft);color:#9c400a;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.badge:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange)}
+h1{font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1.06;letter-spacing:-1.5px;margin:20px 0}
+.lede{font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--body);margin:0;max-width:620px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-note{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.pipe{flex:1 1 380px;min-width:0;background:var(--navy);color:#fff;border-radius:20px;padding:28px;box-shadow:0 24px 60px rgba(8,39,57,.18)}
+.pipe-title{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal-light)}
+.pipe ol{list-style:none;margin:20px 0 0;padding:0}
+.pipe li{display:flex;gap:14px}
+.pipe .rail{display:flex;flex-direction:column;align-items:center;flex:none}
+.pipe .dot{width:12px;height:12px;border-radius:50%;background:var(--orange);margin-top:6px}
+.pipe .dot.you{background:var(--teal-bar)}
+.pipe .line{width:2px;flex:1;background:var(--navy-line)}
+.pipe li:last-child .line{display:none}
+.pipe .step{padding-bottom:16px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.pipe .step b{font-weight:600;font-size:16px}
+.pipe .step span{font-size:13px;color:var(--orange-light)}
+.pipe .step span.you{color:var(--on-navy-muted)}
+.pipe-foot{margin-top:24px;padding-top:18px;border-top:1px solid var(--navy-line);font-size:13px;color:var(--on-navy-muted)}
+
+/* workflow */
+.flow{display:flex;flex-wrap:wrap;gap:28px;align-items:stretch}
+.flow-list{flex:1 1 280px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step-btn{display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;font:inherit;padding:14px 18px;min-height:52px;border-radius:14px;background:#fff;color:var(--ink);border:1px solid var(--line);transition:background .2s ease,color .2s ease,border-color .2s ease}
+.step-btn:hover{border-color:var(--teal)}
+.step-btn[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.step-btn .n{font-family:var(--mono);font-size:12px;opacity:.8}
+.step-btn .l{font-weight:600;font-size:16px}
+.flow-panel{flex:999 1 460px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3vw,40px);box-shadow:0 10px 30px rgba(8,39,57,.06)}
+.flow-panel .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--orange)}
+.flow-panel h3{font-size:clamp(22px,2.4vw,30px);line-height:1.2;margin:12px 0 14px}
+.flow-panel p{font-size:17px;line-height:1.7;color:var(--body);margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tags span{font-size:13px;font-weight:600;color:var(--teal-2);background:var(--teal-soft);border-radius:8px;padding:6px 10px}
+
+/* automation */
+#automation{background:var(--navy);color:#fff}
+#automation .kicker{color:var(--teal-light)}
 #automation h2{color:#fff}
-#automation .sub{color:#b9cbd4}
-#automation .card{
-  background:#0d3346;border-color:#1d4b5e;box-shadow:none;
-}
-#automation .card:hover{border-color:#367286;box-shadow:0 18px 50px rgba(0,0,0,.18)}
-#automation .card h3{color:#fff}
-#automation .card p{color:#b9cbd4}
-#automation .card .step{background:#143f51;color:#6ed0cf}
+#automation .sub{color:var(--on-navy-sub);max-width:720px}
+.acc{display:flex;flex-direction:column;gap:10px}
+.acc-row{border-radius:16px;border:1px solid var(--navy-line);background:var(--navy-2);transition:background .2s ease,border-color .2s ease}
+.acc-row:hover{border-color:#9fd0d8}
+.acc-row.open{border-color:var(--navy-line-on);background:var(--navy-3)}
+.acc-row button{width:100%;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer;display:flex;align-items:center;gap:16px;padding:20px 22px;min-height:64px}
+.acc-row .n{font-family:var(--mono);font-size:12px;color:var(--teal-light);flex:none}
+.acc-row .t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.acc-row .t b{font-family:var(--display);font-weight:600;font-size:18px;color:#fff}
+.acc-row .t span{font-size:14.5px;color:var(--on-navy-muted)}
+.acc-row svg{flex:none;transition:transform .25s ease}
+.acc-row.open svg{transform:rotate(180deg)}
+.acc-body{padding:0 22px 22px 58px;font-size:16px;line-height:1.7;color:var(--on-navy);max-width:860px}
+.acc-body[hidden]{display:none}
 
-.pillars{
-  display:grid;gap:1px;overflow:hidden;
-  grid-template-columns:repeat(4,1fr);
-  border:1px solid var(--line);border-radius:16px;background:var(--line);
-  box-shadow:var(--shadow-sm);
-}
-.pillar{background:var(--surface);padding:28px;min-height:205px}
-.pillar .num{
-  display:flex;align-items:center;justify-content:center;
-  width:34px;height:34px;border-radius:9px;
-  font-size:12px;font-weight:800;color:var(--accent);
-  background:var(--accent-soft);margin-bottom:20px;
-}
-.pillar h3{margin:0 0 8px;font-size:17px;line-height:1.35}
-.pillar p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.65}
+/* demo */
+.demo{display:flex;flex-wrap:wrap;gap:24px;align-items:stretch}
+.demo-in{flex:1 1 380px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:22px}
+.demo-q{font-weight:600;font-size:15px;margin-bottom:10px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{cursor:pointer;font:inherit;font-size:14.5px;font-weight:600;padding:10px 14px;min-height:44px;border-radius:10px;background:#fff;color:var(--ink);border:1px solid var(--line-2)}
+.pill[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal)}
+.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;font-size:15.5px;line-height:1.5;min-height:44px}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--teal);flex:none}
+.check.sub-check{margin-left:32px}
+.check.off{opacity:.45;cursor:default}
+.demo-out{flex:1 1 380px;min-width:0;background:var(--navy);color:#fff;border-radius:20px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:18px}
+.demo-out .label{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--teal-light)}
+.level{display:flex;align-items:baseline;gap:12px}
+.level b{font-family:var(--display);font-size:56px;font-weight:800;line-height:1}
+.level span{font-size:14px;color:var(--on-navy-sub)}
+.bars{display:flex;gap:8px}
+.bars i{flex:1;height:10px;border-radius:6px;background:var(--navy-line)}
+.bars i.c{background:var(--teal-bar)} .bars i.e{background:var(--orange)}
+.reasons{display:flex;flex-direction:column;gap:10px}
+.reasons div{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.55;color:var(--on-navy)}
+.reasons i{width:8px;height:8px;margin-top:8px;border-radius:50%;flex:none}
 
-.deliv{
-  list-style:none;padding:0;margin:0;
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
-}
-ul.deliv li{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:12px;padding:19px 20px;
-  font-size:14.5px;box-shadow:var(--shadow-sm);
-}
-ul.deliv li strong{display:block;font-size:15px;margin-bottom:4px}
-ul.deliv li span{color:var(--muted)}
+/* trust, deliverables */
+.tiles{display:flex;flex-wrap:wrap;gap:16px}
+.tile{flex:1 1 240px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .2s ease,box-shadow .2s ease}
+.tile:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(8,39,57,.10)}
+.tile .n{font-family:var(--mono);font-size:12px;color:var(--teal)}
+.tile h3{font-size:18px;margin:10px 0 8px}
+.tile p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+#deliverables{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.deliv{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.deliv-intro{flex:1 1 320px;min-width:0}
+.deliv-intro .sub{margin:0}
+.deliv-grid{flex:2 1 480px;min-width:0;display:flex;flex-wrap:wrap;gap:12px}
+.doc{flex:1 1 220px;border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#f8fbfc;transition:transform .2s ease,box-shadow .2s ease}
+.doc:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(8,39,57,.10)}
+.doc b{display:block;font-weight:600}
+.doc span{display:block;font-size:14.5px;color:var(--muted);margin-top:4px}
+@media (prefers-reduced-motion: reduce){.tile,.doc,.acc-row,.acc-row svg,.step-btn{transition:none}.tile:hover,.doc:hover{transform:none}}
 
-.launch{
-  position:relative;overflow:hidden;
-  background:#082739;border-radius:22px;
-  padding:54px;box-shadow:var(--shadow);
-  color:#fff;
+/* launch */
+.launch{background:var(--navy);color:#fff;border-radius:24px;padding:clamp(32px,6vw,64px);display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between}
+.launch > div{flex:1 1 460px;min-width:0}
+.launch .kicker{color:var(--orange-light)}
+.launch h2{color:#fff;font-size:clamp(26px,3vw,38px);line-height:1.15;margin:12px 0 10px}
+.launch p{margin:0;color:var(--on-navy-sub);font-size:17px}
+footer .wrap{padding-bottom:56px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px}
+footer b{font-family:var(--display);color:var(--ink)}
+@media (max-width:600px){
+  section{padding:60px 0}
+  .hero .wrap{padding-top:44px;padding-bottom:60px}
+  .top nav a:not(.btn){display:none}
+  .top img{width:140px}
+  .acc-body{padding-left:22px}
+  .check.sub-check{margin-left:16px}
 }
-.launch:before{
-  content:"";position:absolute;width:360px;height:360px;
-  border-radius:50%;right:-130px;top:-190px;
-  background:rgba(8,127,149,.35)
-}
-.launch:after{
-  content:"";position:absolute;width:220px;height:220px;
-  border-radius:50%;left:-130px;bottom:-160px;
-  border:1px solid rgba(255,255,255,.1)
-}
-.launch-inner{position:relative;z-index:1;max-width:760px}
-.launch h2{color:#fff;margin-bottom:12px}
-.launch p{color:#bfd0d8;margin:0 0 24px}
-.launch-badge{
-  display:inline-block;padding:6px 10px;border-radius:6px;
-  background:rgba(242,105,15,.16);color:#ffb27e;
-  font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
-  margin-bottom:16px
-}
-.launch-line{
-  display:flex;align-items:center;gap:12px;
-  color:#e3edf0;font-size:13px;font-weight:600
-}
-.launch-line:before{
-  content:"";width:8px;height:8px;border-radius:50%;
-  background:#4ec7bd;box-shadow:0 0 0 5px rgba(78,199,189,.12)
-}
-
-footer{padding:34px 0 52px;color:var(--muted);font-size:13px}
-footer p{margin:0;max-width:850px}
-footer .footer-brand{font-weight:800;color:var(--ink);margin-bottom:5px}
-
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .pillars{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
-  .wrap{width:min(100% - 28px,1120px)}
-  header.hero{padding:24px 0 64px}
-  .hero-top{margin-bottom:52px;align-items:flex-start}
-  .top-label{display:none}
-  .logo{width:230px}
-  h1{letter-spacing:-1.8px;font-size:42px}
-  .lede{font-size:17px}
-  section{padding:62px 0}
-  .grid,.pillars,.deliv{grid-template-columns:1fr}
-  .card{min-height:0;padding:23px}
-  .pillar{min-height:0}
-  .launch{padding:34px 24px;border-radius:16px}
-}
-
 </style>
 </head>
 <body>
 
-<header class="hero">
+<header class="top">
   <div class="wrap">
-    <div class="hero-top">
-      <img class="logo" src="conslt-logo.jpg" alt="ConSL-T, ISA/IEC 62443 Implementation Workbench" width="394" height="251">
-      <span class="top-label">OT cybersecurity, worked out</span>
-    </div>
-    <div class="hero-copy">
-    <div><span class="badge">Coming soon</span></div>
-    <h1>An ISA/IEC 62443 implementation workbench for asset owners</h1>
-    <p class="lede">ConSL-T takes any industrial or OT site from its first asset inventory to audit-ready deliverables. It works out the answers instead of handing you forms to fill in: security targets, applicable requirements, gaps, risks and a plan to close them.</p>
-    <div class="hero-note">
-      <span>Any OT site</span><span>Worked examples included: water, power, oil &amp; gas, pharma, manufacturing</span>
-    </div>
-    </div>
+    <img src="conslt-logo.jpg" alt="ConSL-T, ISA/IEC 62443 Implementation Workbench" width="394" height="251">
+    <nav aria-label="Sections">
+      <a href="#workflow">Workflow</a>
+      <a href="#automation">Automation</a>
+      <a href="#demo">See it work</a>
+      <a href="#deliverables">Deliverables</a>
+      <a class="btn btn-ghost" href="https://github.com/ahadagwan/ConSL-T">GitHub</a>
+    </nav>
   </div>
 </header>
 
-<main>
-  <section>
-    <div class="wrap">
-      <span class="section-kicker">The workflow</span>
-      <h2>From inventory to audit, in one place</h2>
-      <p class="sub">Each step feeds the next, so a change in the plant shows up everywhere it matters.</p>
-      <div class="grid">
-        <div class="card">
-          <span class="step">Model the plant</span>
-          <h3>Assets, zones and conduits</h3>
-          <p>Capture the inventory on site or import it from a spreadsheet, with fields that fit each kind of equipment. ConSL-T proposes a zone and conduit design you refine.</p>
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="badge">Coming soon</span>
+      <h1>ISA/IEC 62443, worked out for you.</h1>
+      <p class="lede">ConSL-T takes any industrial or OT site from its first asset inventory to audit-ready deliverables. It derives the targets, judges the requirements, ranks the gaps and proposes the plan, and you have the final say on every answer.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#demo">See it work</a>
+        <a class="btn btn-ghost" href="#workflow">How it fits together</a>
+      </div>
+      <p class="hero-note">Works for any OT site. Five finished worked examples included: water, power, oil and gas, pharma and manufacturing.</p>
+    </div>
+    <div class="pipe">
+      <div class="pipe-title">From your plant to your deliverables</div>
+      <ol>
+        <li><div class="rail"><span class="dot you"></span><span class="line"></span></div><div class="step"><b>Plant model</b><span class="you">you describe it</span></div></li>
+        <li><div class="rail"><span class="dot"></span><span class="line"></span></div><div class="step"><b>Security targets</b><span>derived</span></div></li>
+        <li><div class="rail"><span class="dot"></span><span class="line"></span></div><div class="step"><b>Requirements</b><span>judged automatically</span></div></li>
+        <li><div class="rail"><span class="dot"></span><span class="line"></span></div><div class="step"><b>Gaps and risks</b><span>ranked</span></div></li>
+        <li><div class="rail"><span class="dot"></span><span class="line"></span></div><div class="step"><b>Mitigation plan</b><span>proposed</span></div></li>
+        <li><div class="rail"><span class="dot you"></span><span class="line"></span></div><div class="step"><b>Audit-ready documents</b><span>generated</span></div></li>
+      </ol>
+      <div class="pipe-foot">Every automatic answer is marked. Edit any of them and yours wins.</div>
+    </div>
+  </div>
+</section>
+
+<section id="workflow">
+  <div class="wrap">
+    <div class="kicker">The workflow</div>
+    <h2>From inventory to audit, in one place</h2>
+    <p class="sub">Each step feeds the next, so a change in the plant shows up everywhere it matters. Pick a step.</p>
+    <div class="flow">
+      <div class="flow-list" role="tablist" aria-label="Workflow steps" id="flow-list"></div>
+      <div class="flow-panel" role="tabpanel" id="flow-panel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="automation">
+  <div class="wrap">
+    <div class="kicker">Automation</div>
+    <h2>The automation does the heavy lifting</h2>
+    <p class="sub">Most 62443 work is reading the plant and applying the standard's rules, again and again. ConSL-T does the reading, writes its answer, marks it as automatic, and leaves the final say with you. Open any row.</p>
+    <div class="acc" id="acc"></div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="kicker">See it work</div>
+    <h2>Describe an area, watch the target follow</h2>
+    <p class="sub">A simplified illustration of how ConSL-T reasons about one area of a plant. The real method weighs more inputs, and shows every one of them.</p>
+    <div class="demo">
+      <div class="demo-in">
+        <div>
+          <div class="demo-q" id="conseq-q">What is the worst a compromise could do here?</div>
+          <div class="pills" role="group" aria-labelledby="conseq-q" id="pills"></div>
         </div>
-        <div class="card">
-          <span class="step">Set targets</span>
-          <h3>Security levels, derived</h3>
-          <p>Each zone's target security level is worked out from consequence and threat, using a transparent, versioned method. Zones exposed to outside networks, or reachable through unprotected links, are raised automatically.</p>
-        </div>
-        <div class="card">
-          <span class="step">Assess</span>
-          <h3>Requirements and gaps</h3>
-          <p>See which system requirements apply to each zone, with many judged automatically from the controls you have recorded, and the gap between what you have and what you need.</p>
-        </div>
-        <div class="card">
-          <span class="step">Analyse risk</span>
-          <h3>A guided risk workshop</h3>
-          <p>Threat scenarios seeded from MITRE ATT&amp;CK for ICS, rated against your organization's own risk criteria, with credit for countermeasures and a risk register that checks every decision against tolerance.</p>
-        </div>
-        <div class="card">
-          <span class="step">Plan</span>
-          <h3>Mitigation and roadmap</h3>
-          <p>Gaps are ranked by severity and turned into a costed plan and a dated roadmap, with a projection of how much each action improves your security posture.</p>
-        </div>
-        <div class="card">
-          <span class="step">Run the programme</span>
-          <h3>The organizational side</h3>
-          <p>Policies, training, change records, reviews and suppliers are read to judge the security programme and its maturity, and the regulations that apply to your sector are identified.</p>
-        </div>
+        <label class="check"><input type="checkbox" id="direct"><span>Connected straight to the internet or a vendor's remote access</span></label>
+        <label class="check"><input type="checkbox" id="behind" checked><span>Sits right behind an area that is connected like that</span></label>
+        <label class="check sub-check" id="fw-label"><input type="checkbox" id="fw"><span>A firewall is recorded on the link between them</span></label>
+      </div>
+      <div class="demo-out" aria-live="polite">
+        <div class="label">Access control target</div>
+        <div class="level"><b id="level">SL 2</b><span>of 4</span></div>
+        <div class="bars" id="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="reasons" id="reasons"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="automation">
-    <div class="wrap">
-      <span class="section-kicker">Automation</span>
-      <h2>The automation does the heavy lifting</h2>
-      <p class="sub">Most 62443 work is reading the plant and applying the standard's rules to it, again and again. ConSL-T does that reading for you, writes its answer, marks it as automatic, and leaves the final say with you.</p>
-      <div class="grid">
-        <div class="card">
-          <span class="step">Automatic</span>
-          <h3>Targets worked out for every zone</h3>
-          <p>Security-level targets are derived from what a compromise could do to people, the environment, production and the business, and from the threat the zone faces. Zones exposed to the internet, a vendor's remote access, or sitting behind such a zone without a firewall between them are raised on their own.</p>
-        </div>
-        <div class="card">
-          <span class="step">Automatic</span>
-          <h3>Requirements judged from your controls</h3>
-          <p>Record the firewall, the backup, the monitoring or the login policy once, and every requirement it answers is judged across every zone it covers, with the reason written out. Where a record shows only part of the picture, it says what is missing.</p>
-        </div>
-        <div class="card">
-          <span class="step">Automatic</span>
-          <h3>A plan proposed for you</h3>
-          <p>ConSL-T works backwards from your gaps to propose the actions that close them, names the zones and machines each one touches, separates real changes to the plant from simply writing down what is already true, and shows how much each action improves your posture.</p>
-        </div>
-        <div class="card">
-          <span class="step">Automatic</span>
-          <h3>The programme read from your records</h3>
-          <p>Policies, training records, change records, review plans and supplier assessments are read to judge the organizational requirements and how mature each one is: written down, being done, or done and repeated.</p>
-        </div>
-        <div class="card">
-          <span class="step">Automatic</span>
-          <h3>Threats and regulations identified</h3>
-          <p>Each zone gets the ICS attack techniques that apply to what it holds and how it is reached, and each site gets the regulations its sector and location bring with them, from NIS2 to OSHA process safety.</p>
-        </div>
-        <div class="card">
-          <span class="step">Automatic</span>
-          <h3>What to record next</h3>
-          <p>Where the engine cannot decide, it says exactly which fact on which machine would let it, grouped so one visit to site answers many questions at once.</p>
-        </div>
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Trust</div>
+    <h2 style="margin-bottom:32px">Built to be trusted</h2>
+    <div class="tiles">
+      <div class="tile"><div class="n">01</div><h3>Every answer shows its working</h3><p>Any derived value traces back to the inputs and rules that produced it.</p></div>
+      <div class="tile"><div class="n">02</div><h3>You have the last word</h3><p>Automatic answers are marked, and a person's edit always wins.</p></div>
+      <div class="tile"><div class="n">03</div><h3>Nothing quietly goes stale</h3><p>When an input changes, every result that depended on it is flagged.</p></div>
+      <div class="tile"><div class="n">04</div><h3>Your data stays with you</h3><p>ConSL-T runs on your own machine. Your plant's details go nowhere.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="deliverables">
+  <div class="wrap deliv">
+    <div class="deliv-intro">
+      <div class="kicker">Deliverables</div>
+      <h2>Documents, generated from the work</h2>
+      <p class="sub">Everything an assessment needs to hand over, produced from the assessment itself rather than written by hand.</p>
+    </div>
+    <div class="deliv-grid">
+      <div class="doc"><b>Cybersecurity Requirements Specification</b><span>For every zone and conduit.</span></div>
+      <div class="doc"><b>Risk and gap reports</b><span>Including the detailed risk assessment.</span></div>
+      <div class="doc"><b>Executive dashboard</b><span>Posture at a glance for management.</span></div>
+      <div class="doc"><b>Assessor pack</b><span>PDF and HTML, ready for an auditor.</span></div>
+      <div class="doc"><b>Sealed bundle</b><span>Tamper-evident, verifiable by the auditor.</span></div>
+      <div class="doc"><b>Framework mapping</b><span>ISO 27001, NIST CSF 2.0, NIST SP 800-82.</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom:72px">
+  <div class="wrap">
+    <div class="launch">
+      <div>
+        <div class="kicker">Coming soon</div>
+        <h2>Built for the people who have to make 62443 real.</h2>
+        <p>ConSL-T is in final testing ahead of its first release.</p>
       </div>
+      <a class="btn btn-primary" href="https://github.com/ahadagwan/ConSL-T">Follow on GitHub</a>
     </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <span class="section-kicker">Trust</span>
-      <h2>Built to be trusted</h2>
-      <p class="sub">An assessment is only useful if you can see how it was reached and correct it when it is wrong.</p>
-      <div class="pillars">
-        <div class="pillar">
-          <span class="num">01</span>
-          <h3>Every answer shows its working</h3>
-          <p>Any derived value can be traced back to the inputs and rules that produced it.</p>
-        </div>
-        <div class="pillar">
-          <span class="num">02</span>
-          <h3>You always have the last word</h3>
-          <p>Automatic answers are clearly marked, and a person's edit always takes precedence over the engine.</p>
-        </div>
-        <div class="pillar">
-          <span class="num">03</span>
-          <h3>Nothing goes quietly out of date</h3>
-          <p>When an input changes, every result that depended on it is flagged for review.</p>
-        </div>
-        <div class="pillar">
-          <span class="num">04</span>
-          <h3>Your data stays with you</h3>
-          <p>ConSL-T runs on your own machine. Your plant's details are not sent anywhere.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <span class="section-kicker">Deliverables</span>
-      <h2>Deliverables, generated</h2>
-      <p class="sub">The documents an assessment needs, produced from the work itself rather than written by hand.</p>
-      <ul class="deliv">
-        <li><strong>Cybersecurity Requirements Specification</strong><span>The specification for each zone and conduit.</span></li>
-        <li><strong>Risk and gap reports</strong><span>Including the detailed risk assessment.</span></li>
-        <li><strong>Executive dashboard and summary</strong><span>Posture at a glance for management.</span></li>
-        <li><strong>Assessor pack</strong><span>PDF and HTML, ready to hand to an auditor.</span></li>
-        <li><strong>Sealed bundle</strong><span>A tamper-evident export an auditor can verify independently.</span></li>
-        <li><strong>Framework mapping</strong><span>ISO 27001, NIST CSF 2.0 and NIST SP 800-82.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="launch">
-        <div class="launch-inner">
-          <span class="launch-badge">Coming soon</span>
-          <h2>Built for the people who have to make 62443 real.</h2>
-          <p>ConSL-T is in final testing ahead of its first release. Follow the project on GitHub for the launch.</p>
-          <div class="launch-line">Audit-ready outputs · transparent decisions · your data stays with you</div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
+  </div>
+</section>
 
 <footer>
-  <div class="wrap">
-    <p class="footer-brand">ConSL-T</p>
-    <p>An ISA/IEC 62443 implementation workbench for industrial asset owners.</p>
-  </div>
+  <div class="wrap"><b>ConSL-T</b><span>An ISA/IEC 62443 implementation workbench for industrial asset owners.</span></div>
 </footer>
+
+<script>
+(function () {
+  var STEPS = [
+    { label: 'Model the plant', title: 'Assets, zones and conduits', body: 'Capture the inventory on site or import it from a spreadsheet, with fields that fit each kind of equipment. ConSL-T proposes a zone and conduit design for you to refine, and keeps it as the single model every later step reads.', tags: ['32 equipment types', 'Site walkdown', 'Spreadsheet import'] },
+    { label: 'Set targets', title: 'Security levels, derived', body: 'Each zone gets a target security level worked out from what a compromise could do and the threat it faces, using a transparent, versioned method. Zones exposed to outside networks, or reachable through unprotected links, are raised automatically.', tags: ['Consequence and threat', 'Exposure aware', 'Versioned method'] },
+    { label: 'Assess', title: 'Requirements and gaps', body: 'See which system requirements apply to every zone, with many judged automatically from the controls you have recorded, and the gap between the level you have and the level you need.', tags: ['100 system requirements', 'Achieved vs target', 'Judged from controls'] },
+    { label: 'Analyse risk', title: 'A guided risk workshop', body: 'Threat scenarios seeded from MITRE ATT&CK for ICS, rated against your own risk criteria, with credit for countermeasures that genuinely stop the attack and a register that checks every decision against tolerance.', tags: ['ATT&CK for ICS', 'Your risk matrix', 'Risk register'] },
+    { label: 'Plan', title: 'Mitigation and roadmap', body: 'Gaps are ranked by severity and turned into a costed plan and a dated roadmap, with a projection of how far each action moves your security posture.', tags: ['Ranked gaps', 'Costed actions', 'Posture projection'] },
+    { label: 'Run the programme', title: 'The organizational side', body: 'Policies, training, change records, reviews and suppliers are read to judge the security programme and how mature it is, and the regulations your sector and location bring are identified.', tags: ['87 programme requirements', 'Maturity', 'Regulations'] }
+  ];
+  var AUTOS = [
+    { title: 'Targets for every zone', line: 'Derived from consequence, threat and exposure.', body: 'Security-level targets come from what a compromise could do to people, the environment, production and the business, and from the threat the zone faces. Zones on the internet or a vendor remote-access line, and zones right behind them with no firewall on the link, are raised on their own, with the reason written out.' },
+    { title: 'Requirements judged from your controls', line: 'Record a control once; every requirement it answers follows.', body: 'Record the firewall, the backup, the monitoring or the login policy once, and every requirement it answers is judged across every zone it covers. Where a record shows only part of the picture, the answer says exactly what is missing.' },
+    { title: 'A plan proposed for you', line: 'Actions worked back from your gaps.', body: 'ConSL-T works backwards from your gaps to propose the actions that close them, names the zones and machines each one touches, and keeps real changes to the plant apart from simply writing down what is already true.' },
+    { title: 'The programme read from your records', line: 'Policies, training, changes, reviews, suppliers.', body: 'The organizational requirements and their maturity are judged from the records a site already keeps: whether something is written down, being done, or done and repeated, with the shortfall named.' },
+    { title: 'Threats and regulations identified', line: 'ATT&CK for ICS techniques and the rules that apply.', body: 'Each zone gets the attack techniques that fit what it holds and how it is reached, remote access first where it is exposed. Each site gets the regulations its sector and location bring, from NIS2 to US process safety rules.' },
+    { title: 'What to record next', line: 'The few facts that unlock the most answers.', body: 'Where the engine cannot decide, it says which fact on which machine would let it, grouped so one visit to site answers many questions at once.' }
+  ];
+  function el(tag, attrs, kids) {
+    var e = document.createElement(tag);
+    for (var k in attrs || {}) { if (k === 'text') e.textContent = attrs[k]; else e.setAttribute(k, attrs[k]); }
+    (kids || []).forEach(function (c) { e.appendChild(c); });
+    return e;
+  }
+  function pad(i) { return String(i + 1).padStart(2, '0'); }
+
+  // workflow step picker
+  var list = document.getElementById('flow-list'), panel = document.getElementById('flow-panel');
+  var stepBtns = STEPS.map(function (s, i) {
+    var b = el('button', { type: 'button', role: 'tab', 'class': 'step-btn', id: 'step-' + i, 'aria-controls': 'flow-panel' },
+      [el('span', { 'class': 'n', text: pad(i) }), el('span', { 'class': 'l', text: s.label })]);
+    b.addEventListener('click', function () { showStep(i); });
+    list.appendChild(b); return b;
+  });
+  function showStep(i) {
+    stepBtns.forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; });
+    var s = STEPS[i];
+    panel.setAttribute('aria-labelledby', 'step-' + i);
+    panel.replaceChildren(
+      el('div', { 'class': 'eyebrow', text: s.label }),
+      el('h3', { text: s.title }),
+      el('p', { text: s.body }),
+      el('div', { 'class': 'tags' }, s.tags.map(function (t) { return el('span', { text: t }); }))
+    );
+  }
+  list.addEventListener('keydown', function (e) {
+    var cur = stepBtns.findIndex(function (b) { return b.getAttribute('aria-selected') === 'true'; });
+    var n = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? cur + 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? cur - 1 : null;
+    if (n === null) return;
+    e.preventDefault(); n = (n + STEPS.length) % STEPS.length; showStep(n); stepBtns[n].focus();
+  });
+  showStep(0);
+
+  // automation accordion: click to toggle; hover opens on devices with a mouse
+  var acc = document.getElementById('acc');
+  var canHover = window.matchMedia('(hover: hover)').matches;
+  var rows = AUTOS.map(function (a, i) {
+    var body = el('div', { 'class': 'acc-body', id: 'acc-body-' + i, text: a.body });
+    var chev = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    chev.setAttribute('width', '20'); chev.setAttribute('height', '20'); chev.setAttribute('viewBox', '0 0 20 20');
+    chev.setAttribute('fill', 'none'); chev.setAttribute('stroke', '#7fd3d6'); chev.setAttribute('stroke-width', '2');
+    chev.setAttribute('stroke-linecap', 'round'); chev.setAttribute('stroke-linejoin', 'round'); chev.setAttribute('aria-hidden', 'true');
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', 'M5 8l5 5 5-5'); chev.appendChild(path);
+    var btn = el('button', { type: 'button', 'aria-controls': 'acc-body-' + i },
+      [el('span', { 'class': 'n', text: pad(i) }), el('span', { 'class': 't' }, [el('b', { text: a.title }), el('span', { text: a.line })]), chev]);
+    var row = el('div', { 'class': 'acc-row' }, [btn, body]);
+    btn.addEventListener('click', function () { openRow(row.classList.contains('open') ? -1 : i); });
+    if (canHover) row.addEventListener('mouseenter', function () { if (!row.classList.contains('open')) openRow(i); });
+    acc.appendChild(row); return { row: row, btn: btn, body: body };
+  });
+  function openRow(i) {
+    rows.forEach(function (r, j) {
+      var on = j === i;
+      r.row.classList.toggle('open', on);
+      r.btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      r.body.hidden = !on;
+    });
+  }
+  openRow(0);
+
+  // demo
+  var CONS = [{ v: 1, label: 'Minor disruption', name: 'minor disruption' }, { v: 2, label: 'Production stops', name: 'production stopping' }, { v: 3, label: 'People could be hurt', name: 'people being hurt' }];
+  var st = { conseq: 2 };
+  var pills = document.getElementById('pills');
+  var pillBtns = CONS.map(function (c) {
+    var b = el('button', { type: 'button', 'class': 'pill', text: c.label });
+    b.addEventListener('click', function () { st.conseq = c.v; renderDemo(); });
+    pills.appendChild(b); return b;
+  });
+  var direct = document.getElementById('direct'), behind = document.getElementById('behind'), fw = document.getElementById('fw'), fwLabel = document.getElementById('fw-label');
+  [direct, behind, fw].forEach(function (x) { x.addEventListener('change', renderDemo); });
+  function reason(color, text) {
+    var i = el('i'); i.style.background = color;
+    return el('div', {}, [i, el('span', { text: text })]);
+  }
+  function renderDemo() {
+    pillBtns.forEach(function (b, j) { b.setAttribute('aria-pressed', CONS[j].v === st.conseq ? 'true' : 'false'); });
+    fw.disabled = !behind.checked; fwLabel.classList.toggle('off', !behind.checked);
+    var inherits = behind.checked && !fw.checked;
+    var floor = (direct.checked || inherits) ? 2 : 0;
+    var level = Math.max(st.conseq, floor);
+    document.getElementById('level').textContent = 'SL ' + level;
+    Array.prototype.forEach.call(document.querySelectorAll('#bars i'), function (bar, j) {
+      var n = j + 1; bar.className = n <= level ? (n <= st.conseq ? 'c' : 'e') : '';
+    });
+    var name = CONS.filter(function (c) { return c.v === st.conseq; })[0].name;
+    var out = [reason('#3fb8c4', 'The worst case here is ' + name + ', which on its own asks for SL ' + st.conseq + '.')];
+    if (direct.checked) out.push(reason('#f2690f', 'Directly reachable from outside, so access control is held at SL 2 or more.'));
+    else if (inherits) out.push(reason('#f2690f', 'Right behind an exposed area with no firewall recorded on the link, so it is treated as exposed too.'));
+    else if (behind.checked && fw.checked) out.push(reason('#9fb3bf', 'Behind an exposed area, but the firewall recorded on the link keeps the exposure out.'));
+    if (level > st.conseq) out.push(reason('#9fb3bf', 'Exposure raised the target above what the consequence alone would set.'));
+    document.getElementById('reasons').replaceChildren.apply(document.getElementById('reasons'), out);
+  }
+  renderDemo();
+})();
+</script>
 </body>
 </html>
